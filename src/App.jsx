@@ -13,6 +13,9 @@ export const App = () => {
 
   const onClickAdd = () => {
     if (todoText === "") return;
+
+    //incompleteTodoに同じものがあればリターン、alert
+
     const newTodos = [...incompleteTodos, todoText];
     setIncompleteTodos(newTodos);
     setTodoText("");
@@ -46,7 +49,11 @@ export const App = () => {
         todoText={todoText}
         onChange={onChangeTodoText}
         onClick={onClickAdd}
+        disabled={incompleteTodos.length >= 5}
       />
+      {incompleteTodos.length >= 5 && (
+        <p style={{ color: "red" }}>登録できるtodoは５コ</p>
+      )}
       <IncompleteTodo
         todos={incompleteTodos}
         onClickComplete={onClickComplete}
